@@ -10,7 +10,8 @@
  * right(right) {}
  * };
  */
-class Solution {
+
+/*class Solution {
 public:
     vector<int> inorderTraversal(TreeNode* root) {
         vector<int> ans;
@@ -27,11 +28,11 @@ public:
                 while (IP->right != NULL && IP->right != curr) {
                     IP = IP->right;
                 }
-               // Create thread
+                // Create thread
                 if (IP->right == NULL) {
                     IP->right = curr; // thread created
                     curr = curr->left;
-                } 
+                }
                 // Thread already exists -> destroy it
                 else {
                     IP->right = NULL; // thread destroy
@@ -40,6 +41,24 @@ public:
                 }
             }
         }
+        return ans;
+    }
+};*/
+class Solution {
+public:
+    void inorder(TreeNode* root, vector<int>& ans) {
+        if (root == NULL) {
+            return;
+        }
+
+        inorder(root->left, ans);
+        ans.push_back(root->val);
+        inorder(root->right, ans);
+    }
+
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> ans;
+        inorder(root, ans);
         return ans;
     }
 };
